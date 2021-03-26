@@ -17,7 +17,7 @@ DNA, while Bob has the same STR repeated five times.
 
 ```
 Ada: CTAGATAGATAGATAGATGACTA
-         ^..^^..^^..^^..^
+       ^..^^..^^..^^..^
 Bia: CTAGATAGATAGATAGATAGATT
        ^..^^..^^..^^..^^..^
 ```
