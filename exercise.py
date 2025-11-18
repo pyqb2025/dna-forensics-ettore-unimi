@@ -91,8 +91,12 @@ class Profiler:
         for i in dna_fpr.keys() :
             sequence_profile[i] = self.longest_run(i)
         
+        guilty: bool = True
+        for i in dna_fpr.keys() :
+            if sequence_profile[i] != dna_fpr[i] :
+                guilty = False
 
-        return sequence_profile == dna_fpr
 
+        return guilty
 
 ######
