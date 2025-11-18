@@ -68,6 +68,7 @@ class Profiler:
         while tikcer < len(self.seq) :
             reading_frame: str = ""
             for i in range(0,subseq_len) :
+                if tikcer + i < len(self.seq)
                 reading_frame += self.seq[tikcer+i]
             if reading_frame == subseq :
                 repetition_counter += 1
