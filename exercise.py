@@ -93,3 +93,6 @@ class Profiler:
         
 
         return sequence_profile == dna_fpr
+
+
+######
