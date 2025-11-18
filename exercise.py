@@ -60,7 +60,19 @@ class Profiler:
         >>> p.longest_run('TATC')
         5
         """
-        return -1
+
+        subseq_len: int = len(subseq)
+        tikcer: int = 0
+        repetition_counter: int = 0
+
+        while tikcer < len(self.seq) :
+            reading_frame: str = ""
+            for i in range(0,subseq_len) :
+                reading_frame += self.seq[tikcer+i]
+            if reading_frame == subseq :
+                repetition_counter += 1
+
+        return repetition_counter
 
     def match_suspect(self,
                       suspect_name: str,
@@ -73,4 +85,9 @@ class Profiler:
         >>> p.match_suspect('Abel', {'AGAT':3, 'AATG':7, 'TATC':4})
         False
         """
-        pass
+        sequence_profile: dict[str,int] = {}
+        for i in dna_fpr.keys() :
+            sequence_profile[i] = self.longest_run(i)
+        
+
+        return sequence_profile == dna_fpr
