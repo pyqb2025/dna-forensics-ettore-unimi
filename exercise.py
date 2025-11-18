@@ -73,8 +73,7 @@ class Profiler:
             if reading_frame == subseq :
                 repetition_counter += 1
             
-            tikcer += subseq_len
-
+            tikcer += 1
         return repetition_counter
 
     def match_suspect(self,
