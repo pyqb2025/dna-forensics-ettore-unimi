@@ -83,7 +83,7 @@ class Profiler:
                 repetition_counter = 0
 
             tikcer += 1
-        return repetition_counter
+        return max(repetition_list)
 
     def match_suspect(self,
                       suspect_name: str,
