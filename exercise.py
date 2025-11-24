@@ -78,6 +78,7 @@ class Profiler:
                 if repetition_counter != 0 :
                     repetition_list.append(repetition_counter)
                     repetition_counter = 0
+                    ticker += 1
                 
 
         return max(repetition_list)
