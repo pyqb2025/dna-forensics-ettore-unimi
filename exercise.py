@@ -99,13 +99,14 @@ class Profiler:
         >>> p.match_suspect('Abel', {'AGAT':3, 'AATG':7, 'TATC':4})
         False
         """
-        sequence_profile: dict[str,int] = {}
-        for i in dna_fpr.keys() :
-            sequence_profile[i] = self.longest_run(i)
+        suspect_profile: dict[str,int] = {}               #to store the subsequences and their longest repetitions in the suspect
+
+        for i in dna_fpr.keys() :                         
+            suspect_profile[i] = self.longest_run(i)      #populate the dictionary with the footprint susequences we are looking for and their longest run in the suspect
         
-        guilty: bool = True
-        for i in dna_fpr.keys() :
-            if sequence_profile[i] != dna_fpr[i] :
+        guilty: bool = True                               #guilty until proven innocent
+        for i in dna_fpr.keys() :                         #confront the footprint with the suspect profile
+            if suspect_profile[i] != dna_fpr[i] :         #if one of the longest run in the footprint and in the suspect are not the same, the suspect is innocent
                 guilty = False
 
 
