@@ -60,7 +60,33 @@ class Profiler:
         >>> p.longest_run('TATC')
         5
         """
-        return -1
+
+        subseq_len: int = len(subseq)                                #store the lenght of the subsequence
+        tikcer: int = 0                                              #counter for the cicle
+        repetition_counter: int = 0                                  #to count how many times the subsequence is repeting
+        repetition_list: list[int] = []                              #to store the lenght of every repetition
+
+        while tikcer < len(self.seq) :
+
+            reading_frame: str = ""                                  #to store the frame that we are currently reading / reset the frame every round of the cicle
+            
+            for i in range(0, subseq_len) :                          #cicle to fill the reading frame
+                if tikcer + i < len(self.seq) :
+                    reading_frame += self.seq[tikcer+i]
+            
+            if reading_frame == subseq :                            #check if we found our subsequence
+                repetition_counter += 1                             #count the repetition
+                tikcer += subseq_len                                #we can skip the characters that are alreadypart of the subsequence that we found
+            else :                                                  
+                if repetition_counter != 0 :                        #if the reading frame doesn't contain the subsequence but the repetition counter is not zero, it means that we exited a repettion
+                    repetition_list.append(repetition_counter)      #store how many times the subsequence was repeted
+                    repetition_counter = 0                          #reset the counter
+                    
+                tikcer += 1                                        
+        
+        repetition_list.append(repetition_counter)
+
+        return max(repetition_list)
 
     def match_suspect(self,
                       suspect_name: str,
@@ -73,4 +99,17 @@ class Profiler:
         >>> p.match_suspect('Abel', {'AGAT':3, 'AATG':7, 'TATC':4})
         False
         """
-        pass
+        suspect_profile: dict[str,int] = {}               #to store the subsequences and their longest repetitions in the suspect
+
+        for i in dna_fpr.keys() :                         
+            suspect_profile[i] = self.longest_run(i)      #populate the dictionary with the footprint susequences we are looking for and their longest run in the suspect
+        
+        guilty: bool = True                               #guilty until proven innocent
+        for i in dna_fpr.keys() :                         #confront the footprint with the suspect profile
+            if suspect_profile[i] != dna_fpr[i] :         #if one of the longest run in the footprint and in the suspect are not the same, the suspect is innocent
+                guilty = False
+
+
+        return guilty
+
+######
