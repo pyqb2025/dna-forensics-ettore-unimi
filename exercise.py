@@ -65,7 +65,6 @@ class Profiler:
         tikcer: int = 0
         repetition_counter: int = 0
         repetition_list: list[int] = []
-        found: bool = False
 
         while tikcer < len(self.seq) :
             reading_frame: str = ""
@@ -73,16 +72,14 @@ class Profiler:
                 if tikcer + i < len(self.seq) :
                     reading_frame += self.seq[tikcer+i]
             if reading_frame == subseq :
-                found = True
                 repetition_counter += 1
                 tikcer += subseq_len
             else :
-                found = False
-            if found != True :
-                repetition_list.append(repetition_counter)
-                repetition_counter = 0
+                if repetition_counter != 0 :
+                    repetition_list.append(repetition_counter)
+                    repetition_counter = 0
+                
 
-            tikcer += 1
         return max(repetition_list)
 
     def match_suspect(self,
