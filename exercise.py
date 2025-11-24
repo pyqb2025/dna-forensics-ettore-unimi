@@ -80,7 +80,8 @@ class Profiler:
                     repetition_counter = 0
                     
                 tikcer += 1
-                
+        
+        repetition_list.append(repetition_counter)
 
         return max(repetition_list)
 
